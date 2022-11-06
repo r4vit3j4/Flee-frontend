@@ -11,12 +11,18 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { IconLogout, IconSun, IconUser } from "@tabler/icons";
+import {
+  IconLayoutDashboard,
+  IconLogout,
+  IconSun,
+  IconUser,
+} from "@tabler/icons";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = ({ user, setUser }) => {
   const toast = new useToast();
+  const navigate = useNavigate();
 
   const logout = () => {
     localStorage.removeItem("userData");
@@ -31,7 +37,6 @@ const Navbar = ({ user, setUser }) => {
     });
   };
 
-  const navigate = useNavigate();
   return (
     <Flex
       w="full"
@@ -64,6 +69,16 @@ const Navbar = ({ user, setUser }) => {
                 <Icon as={IconUser} h="5" w="5" />
               </MenuButton>
               <MenuList>
+                <MenuItem
+                  onClick={() => {
+                    navigate("/outgoing");
+                  }}
+                >
+                  <Flex align="center" gap="2" color="blue.400">
+                    <Icon as={IconLayoutDashboard} h="5" w="5" />
+                    <Text>Dashboard</Text>
+                  </Flex>
+                </MenuItem>
                 <MenuItem onClick={() => logout()}>
                   <Flex align="center" gap="2" color="red.400">
                     <Icon as={IconLogout} h="5" w="5" />
