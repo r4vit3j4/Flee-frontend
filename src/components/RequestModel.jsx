@@ -36,7 +36,7 @@ const RequestModel = ({ user, fetchDetails }) => {
   const submitDetails = (e) => {
     e.preventDefault();
     try {
-      const url = "http://fleepass.herokuapp.com/createPass";
+      const url = "https://fleepass.herokuapp.com/createPass";
       axios
         .post(url, {
           userName: user.fullName,
