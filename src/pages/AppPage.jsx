@@ -41,7 +41,14 @@ const AppPage = ({ user }) => {
       <Flex direction="column" w="full" maxW="7xl" gap="10" mt="10">
         <Flex w="full" justify={["center", "center", "flex-end"]}>
           <Heading as="h2">
-            Welcome <Text as="span">{user.fullName}</Text>
+            Welcome{" "}
+            <Text
+              as="span"
+              bg="linear-gradient(230deg,#a24bcf,#4b79cf,#4bc5cf)"
+              backgroundClip="text"
+            >
+              {user.fullName}
+            </Text>
           </Heading>
         </Flex>
         <Flex w="full" justify="flex-start">
