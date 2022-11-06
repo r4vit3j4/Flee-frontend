@@ -90,7 +90,9 @@ const OutgoingPage = () => {
               setDate(e.target.value);
             }}
           />
-          <Button onClick={fetchDetails}>Search</Button>
+          <Button onClick={fetchDetails} colorScheme="blue">
+            Search
+          </Button>
         </Flex>
         {data.length > 0 && (
           <Box
