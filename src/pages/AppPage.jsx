@@ -80,7 +80,9 @@ const AppPage = ({ user }) => {
                   {prevData.map((pass, index) => {
                     return (
                       <Tr key={index}>
-                        <Td>{pass.date.substring(0, 10)}</Td>
+                        <Td>
+                          {pass.date}-{pass?.month}-{pass?.year}
+                        </Td>
                         <Td>{pass.purpose}</Td>
                         <Td>{pass.outTime}</Td>
                         <Td>{pass.inTime}</Td>

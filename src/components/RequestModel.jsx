@@ -33,6 +33,8 @@ const RequestModel = ({ fetchData }) => {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
+  const [year, month, day] = date.split("-");
+
   const submitDetails = (e) => {
     e.preventDefault();
     console.log("sdad");
@@ -41,9 +43,11 @@ const RequestModel = ({ fetchData }) => {
       const { data } = new axios.post(url, {
         userName: fullname,
         phoneNumber: mobileNumber,
-        rollNumber: rollNumber,
+        rollNumber: rollNumber.toLowerCase(),
         purpose: purpose,
-        date: date,
+        date: day,
+        month: month,
+        year: year,
         outTime: timeOut,
         inTime: timeIn,
       });

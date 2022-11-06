@@ -28,7 +28,7 @@ const LoginPage = ({ setUser }) => {
     try {
       const url = "http://172.16.217.156:5000/student/login";
       const { data } = await axios.post(url, {
-        rollNumber: rollNumber,
+        rollNumber: rollNumber.toLowerCase(),
         password: password,
       });
 
