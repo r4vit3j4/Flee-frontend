@@ -17,11 +17,9 @@ import {
 } from "@chakra-ui/react";
 import { IconPlus } from "@tabler/icons";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
-const RequestModel = ({ fetchData }) => {
-  const [fullname, setFullName] = useState("");
-  const [rollNumber, setRollNumber] = useState("");
+const RequestModel = ({ user, fetchDetails }) => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [purpose, setPurpose] = useState("");
   const [timeOut, setTimeOut] = useState("");
@@ -37,26 +35,29 @@ const RequestModel = ({ fetchData }) => {
 
   const submitDetails = (e) => {
     e.preventDefault();
-    console.log("sdad");
     try {
-      const url = "http://172.16.221.156:3000/createPass";
-      const { data } = new axios.post(url, {
-        userName: fullname,
-        phoneNumber: mobileNumber,
-        rollNumber: rollNumber.toLowerCase(),
-        purpose: purpose,
-        date: day,
-        month: month,
-        year: year,
-        outTime: timeOut,
-        inTime: timeIn,
-      });
+      const url = "http://fleepass.herokuapp.com/createPass";
+      axios
+        .post(url, {
+          userName: user.fullName,
+          phoneNumber: mobileNumber,
+          rollNumber: user.rollNumber.toLowerCase(),
+          purpose: purpose,
+          date: day,
+          month: month,
+          year: year,
+          outTime: timeOut,
+          inTime: timeIn,
+        })
+        .then((res) => {
+          fetchDetails();
+          onClose();
+        });
     } catch (err) {
       console.log(err);
     }
-    onClose();
-    fetchData();
   };
+
   return (
     <Box>
       <Button
@@ -85,26 +86,6 @@ const RequestModel = ({ fetchData }) => {
 
               <FormControl>
                 <Flex direction="column">
-                  <Box mt="4">
-                    <FormLabel>Name</FormLabel>
-                    <Input
-                      ref={initialRef}
-                      placeholder="Full Name"
-                      value={fullname}
-                      required
-                      onChange={(e) => setFullName(e.target.value)}
-                    />
-                  </Box>
-                  {/* Student Roll no. */}
-                  <Box mt="4">
-                    <FormLabel>Roll no.</FormLabel>
-                    <Input
-                      placeholder="Roll no."
-                      value={rollNumber}
-                      required
-                      onChange={(e) => setRollNumber(e.target.value)}
-                    />
-                  </Box>
                   {/* Student Mobile Number */}
                   <Box mt="4">
                     <FormLabel>Mobile Number</FormLabel>

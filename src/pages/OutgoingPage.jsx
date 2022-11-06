@@ -38,7 +38,7 @@ const OutgoingPage = () => {
       let [year, month, day] = date.split("-");
 
       console.log(year, month, day);
-      url = `http://172.16.221.156:3000/getStudents?date=${day}&month=${month}&year=${year}`;
+      url = `https://fleepass.herokuapp.com/getStudents?date=${day}&month=${month}&year=${year}`;
     } else {
       const today = new Date();
       const yyyy = today.getFullYear();
@@ -50,7 +50,7 @@ const OutgoingPage = () => {
 
       const formattedToday = yyyy + "-" + mm + "-" + dd;
       console.log(formattedToday);
-      url = `http://172.16.221.156:3000/getStudents?date=${dd}&month=${mm}&year=${yyyy}`;
+      url = `https://fleepass.herokuapp.com/getStudents?date=${dd}&month=${mm}&year=${yyyy}`;
     }
     try {
       const { data } = await axios.get(url);
@@ -63,7 +63,7 @@ const OutgoingPage = () => {
   };
 
   const verify = async (rollNumber, day, month, year, type) => {
-    const url = `http://172.16.221.156:3000/verify?id=${rollNumber}&date=${day}&type=${type}&month=${month}&year=${year}`;
+    const url = `https://fleepass.herokuapp.com/verify?id=${rollNumber}&date=${day}&type=${type}&month=${month}&year=${year}`;
     console.log(url);
     try {
       const { data } = await axios.get(url);

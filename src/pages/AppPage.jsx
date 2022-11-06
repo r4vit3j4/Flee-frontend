@@ -21,21 +21,14 @@ import RequestModel from "../components/RequestModel";
 
 const AppPage = ({ user }) => {
   const [loading, setLoading] = useState(false);
-
   const [prevData, setPrevData] = useState([]);
 
-  console.log(user);
-
   const fetchData = async () => {
-    const url = `http://172.16.221.156:3000/getPrevPass?id=${user.rollNumber}`;
+    const url = `https://fleepass.herokuapp.com/getPrevPass?id=${user.rollNumber}`;
 
-    try {
-      const { data: res } = await axios.get(url);
-      setPrevData(res.data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
+    const { data: res } = await axios.get(url);
+    setPrevData(res.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -52,7 +45,7 @@ const AppPage = ({ user }) => {
           </Heading>
         </Flex>
         <Flex w="full" justify="flex-start">
-          <RequestModel fetchData={fetchData} />
+          <RequestModel user={user} fetchDetails={fetchData} />
         </Flex>
 
         <Box

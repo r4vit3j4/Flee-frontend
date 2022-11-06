@@ -18,7 +18,7 @@ import { IconNumber, IconPassword } from "@tabler/icons";
 import React from "react";
 import { useState } from "react";
 
-const LoginPage = ({ setUser }) => {
+const SecurityLogin = ({ setUser }) => {
   const [rollNumber, setRollNumber] = useState("");
   const [password, setPassword] = useState("");
   const toast = new useToast();
@@ -142,4 +142,4 @@ const LoginPage = ({ setUser }) => {
   );
 };
 
-export default LoginPage;
+export default SecurityLogin;

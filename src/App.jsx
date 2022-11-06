@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import OutgoingPage from "./pages/OutgoingPage";
+import SecurityLogin from "./pages/SecurityLogin";
 
 const App = () => {
   const [user, setUser] = useState(
@@ -23,6 +24,16 @@ const App = () => {
             path="/login"
             element={
               !user ? <LoginPage setUser={setUser} /> : <Navigate to="/app" />
+            }
+          />
+          <Route
+            path="/login/security"
+            element={
+              !user ? (
+                <SecurityLogin setUser={setUser} />
+              ) : (
+                <Navigate to="/outgoing" />
+              )
             }
           />
           <Route
