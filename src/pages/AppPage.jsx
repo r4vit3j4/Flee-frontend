@@ -55,13 +55,10 @@ const AppPage = ({ user }) => {
           <RequestModel user={user} fetchDetails={fetchData} />
         </Flex>
 
-        <Box
-          w="full"
-          p="10"
-          mt="5"
-          border="1px solid #e6e6e6"
-          borderRadius="lg"
-        >
+        <Heading as="h2" mt="5">
+          Previous Outpasses
+        </Heading>
+        <Box w="full" p="10" border="1px solid #e6e6e6" borderRadius="lg">
           <TableContainer>
             {loading ? (
               <Spinner />
