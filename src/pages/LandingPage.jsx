@@ -25,7 +25,7 @@ const LandingPage = () => {
           </Text>{" "}
           management made simpler
         </Heading>
-        <Text>IIIT Kottayam Flee Portal</Text>
+        {/* <Text>IIIT Kottayam Outpass Portal</Text> */}
         <Button
           rightIcon={<Icon as={IconArrowRight} h="5" w="5" />}
           colorScheme="blue"
