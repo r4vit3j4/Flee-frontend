@@ -12,9 +12,11 @@ import {
   Th,
   Thead,
   Tr,
+  useColorMode,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { themeConstants } from "../theme/theme";
 
 const OutgoingPage = () => {
   const today = new Date();
@@ -38,7 +40,9 @@ const OutgoingPage = () => {
       let [year, month, day] = date.split("-");
 
       console.log(year, month, day);
-      url = `https://fleepass.herokuapp.com/getStudents?date=${day}&month=${month}&year=${year}`;
+      url = `${
+        import.meta.env.VITE_API_URL
+      }/getOutgoingStudents?date=${day}&month=${month}&year=${year}`;
     } else {
       const today = new Date();
       const yyyy = today.getFullYear();
@@ -50,7 +54,9 @@ const OutgoingPage = () => {
 
       const formattedToday = yyyy + "-" + mm + "-" + dd;
       console.log(formattedToday);
-      url = `https://fleepass.herokuapp.com/getStudents?date=${dd}&month=${mm}&year=${yyyy}`;
+      url = `${
+        import.meta.env.VITE_API_URL
+      }/getOutgoingStudents?date=${dd}&month=${mm}&year=${yyyy}`;
     }
     try {
       const { data } = await axios.get(url);
@@ -63,7 +69,9 @@ const OutgoingPage = () => {
   };
 
   const verify = async (rollNumber, day, month, year, type) => {
-    const url = `https://fleepass.herokuapp.com/verify?id=${rollNumber}&date=${day}&type=${type}&month=${month}&year=${year}`;
+    const url = `${
+      import.meta.env.VITE_API_URL
+    }/verify?id=${rollNumber}&date=${day}&type=${type}&month=${month}&year=${year}`;
     console.log(url);
     try {
       const { data } = await axios.get(url);
@@ -76,6 +84,8 @@ const OutgoingPage = () => {
   useEffect(() => {
     fetchDetails("initial");
   }, []);
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Flex w="full" justify="center">
@@ -99,7 +109,11 @@ const OutgoingPage = () => {
             w="full"
             p="10"
             mt="5"
-            border="1px solid #e6e6e6"
+            border={`1px solid ${
+              colorMode === "light"
+                ? themeConstants.borderLight
+                : themeConstants.borderDark
+            }`}
             borderRadius="lg"
           >
             <TableContainer>

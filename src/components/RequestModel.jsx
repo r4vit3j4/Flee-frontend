@@ -36,7 +36,7 @@ const RequestModel = ({ user, fetchDetails }) => {
   const submitDetails = (e) => {
     e.preventDefault();
     try {
-      const url = "https://fleepass.herokuapp.com/createPass";
+      const url = `${import.meta.env.VITE_API_URL}/createPass`;
       axios
         .post(url, {
           userName: user.fullName,
@@ -90,6 +90,7 @@ const RequestModel = ({ user, fetchDetails }) => {
                   <Box mt="4">
                     <FormLabel>Mobile Number</FormLabel>
                     <Input
+                      ref={initialRef}
                       placeholder="Mobile Number"
                       value={mobileNumber}
                       required
@@ -100,7 +101,6 @@ const RequestModel = ({ user, fetchDetails }) => {
                   <Box mt={4}>
                     <FormLabel>Purpose</FormLabel>
                     <Input
-                      ref={initialRef}
                       placeholder="Purpose"
                       value={purpose}
                       required
@@ -111,7 +111,6 @@ const RequestModel = ({ user, fetchDetails }) => {
                   <Box mt={4}>
                     <FormLabel>Date</FormLabel>
                     <Input
-                      ref={initialRef}
                       placeholder="Date"
                       value={date}
                       type="date"
@@ -123,7 +122,6 @@ const RequestModel = ({ user, fetchDetails }) => {
                   <Box mt={4}>
                     <FormLabel>Time Out</FormLabel>
                     <Input
-                      ref={initialRef}
                       placeholder="Time Out"
                       value={timeOut}
                       type="time"
@@ -135,7 +133,6 @@ const RequestModel = ({ user, fetchDetails }) => {
                   <Box mt={4}>
                     <FormLabel>Time In</FormLabel>
                     <Input
-                      ref={initialRef}
                       placeholder="Time In"
                       value={timeIn}
                       type="time"

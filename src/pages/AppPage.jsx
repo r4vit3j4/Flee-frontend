@@ -14,17 +14,21 @@ import {
   Th,
   Thead,
   Tr,
+  useColorMode,
 } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import RequestModel from "../components/RequestModel";
+import { themeConstants } from "../theme/theme";
 
 const AppPage = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const [prevData, setPrevData] = useState([]);
 
   const fetchData = async () => {
-    const url = `https://fleepass.herokuapp.com/getPrevPass?id=${user.rollNumber}`;
+    const url = `${import.meta.env.VITE_API_URL}/getPrevPass?id=${
+      user.rollNumber
+    }`;
 
     const { data: res } = await axios.get(url);
     setPrevData(res.data);
@@ -35,6 +39,8 @@ const AppPage = ({ user }) => {
     setLoading(true);
     fetchData();
   }, []);
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Flex w="full" justify="center">
@@ -58,7 +64,16 @@ const AppPage = ({ user }) => {
         <Heading as="h2" mt="5">
           Previous Outpasses
         </Heading>
-        <Box w="full" p="10" border="1px solid #e6e6e6" borderRadius="lg">
+        <Box
+          w="full"
+          p="10"
+          border={`1px solid ${
+            colorMode === "light"
+              ? themeConstants.borderLight
+              : themeConstants.borderDark
+          }`}
+          borderRadius="lg"
+        >
           <TableContainer>
             {loading ? (
               <Spinner />
@@ -75,6 +90,7 @@ const AppPage = ({ user }) => {
                 </Thead>
                 <Tbody>
                   {prevData.map((pass, index) => {
+                    console.log(pass);
                     return (
                       <Tr key={index}>
                         <Td>
@@ -84,7 +100,16 @@ const AppPage = ({ user }) => {
                         <Td>{pass.outTime}</Td>
                         <Td>{pass.inTime}</Td>
                         <Td>
-                          <Badge colorScheme="blue" fontSize="15">
+                          <Badge
+                            colorScheme={
+                              pass.status === "To be verified"
+                                ? "orange"
+                                : pass.status === "Verified"
+                                ? "green"
+                                : "red"
+                            }
+                            fontSize="15"
+                          >
                             {pass.status}
                           </Badge>
                         </Td>

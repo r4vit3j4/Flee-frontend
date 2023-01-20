@@ -26,7 +26,7 @@ const LoginPage = ({ setUser }) => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      const url = "https://fleepass.herokuapp.com/login/student";
+      const url = `${import.meta.env.VITE_API_URL}/login/student`;
       const { data } = await axios.post(url, {
         rollNumber: rollNumber.toLowerCase(),
         password: password,

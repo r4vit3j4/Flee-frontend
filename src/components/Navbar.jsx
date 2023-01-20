@@ -9,6 +9,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useColorMode,
   useToast,
 } from "@chakra-ui/react";
 import {
@@ -19,10 +20,13 @@ import {
 } from "@tabler/icons";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { themeConstants } from "../theme/theme";
 
 const Navbar = ({ user, setUser }) => {
   const toast = new useToast();
   const navigate = useNavigate();
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const logout = () => {
     localStorage.removeItem("userData");
@@ -42,7 +46,11 @@ const Navbar = ({ user, setUser }) => {
       w="full"
       p="4"
       py="6"
-      borderBottom="1px solid #e6e6e6"
+      borderBottom={`1px solid ${
+        colorMode === "light"
+          ? themeConstants.borderLight
+          : themeConstants.borderDark
+      }`}
       position="sticky"
       top="0"
       backdropFilter="blur(4px)"
@@ -60,7 +68,7 @@ const Navbar = ({ user, setUser }) => {
           />
         </Link>
         <Flex align="center" gap="3">
-          <Button variant="ghost">
+          <Button variant="ghost" onClick={toggleColorMode}>
             <Icon as={IconSun} h="5" w="5" />
           </Button>
           {user ? (
